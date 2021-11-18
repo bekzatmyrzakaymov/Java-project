@@ -1,0 +1,270 @@
+*{
+  font-family: Arial;
+}
+/* -------------------------- */
+header{
+  width: 100%;
+  height: 80px;
+  background-color: #000000;
+  color: white;
+  padding-top: 20px;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+
+
+.header_section {
+position: relative;
+z-index: 99999;
+margin-bottom: -20px;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+ul {
+  background: #8CCAFF;
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+  height: 60px;
+
+}
+li {
+  color: white;
+  background: #7598B6;
+  display: block;
+  float: left;
+  position: relative;
+  text-decoration: none;
+  transition-duration: 0.5s;
+  width: 303.7px;
+  padding-left: 1px;
+  font-family: "Tahoma";
+  font-weight: 200;
+  height: 25px;
+  font-size:19px;
+  filter: blur(0px);
+  height: 60px;
+  padding-top:15px;
+}
+li a {
+  color: white;
+  text-decoration: none;
+}
+li:hover {
+  background: red;
+  cursor: pointer;
+  background: #A3CFF9;
+
+}
+ul li ul {
+  background: orange;
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  transition: all 0.5s ease;
+  left: 0;
+  display: none;
+}
+ul li:hover > ul,
+ul li ul:hover {
+  visibility: visible;
+  opacity: 1;
+  display: block;
+}
+ul li ul li {
+  width: 100%;
+}
+ul li:hover{
+  font-size:24px;
+}
+
+.link:hover{
+  text-decoration: none;
+  color: white;
+  padding: 25px 10px;
+}
+
+.link-1 {
+  transition: 0.3s ease;
+  color: #ffffff;
+  font-size: 20px;
+  text-decoration: none;
+  border-top: 4px solid #7598B6;
+  border-bottom: 4px solid #7598B6;
+  padding: 5px 0;
+}
+
+.link-1:hover {
+  border-top: 4px solid #ffffff;
+  border-bottom: 4px solid #ffffff;
+  padding: 6px 0; 
+  font-size:21px;
+}
+
+h4{
+  text-align: center;
+}
+
+.search{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: -50px;
+
+}
+
+.inside{
+  width: 550px;
+  height: 80px;
+  border-radius: 10px;
+  margin-top: 5px;
+  background-color: #FAE6C8;
+  opacity: 80%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.input{
+  width: 60%;
+  height: 40px;
+  border-radius: 10px;
+  padding-left: 5px;
+}
+
+.submit{
+  width: 30%;
+  background-color: #99D9EA;
+  height: 40px;
+  border-radius: 10px;
+}
+
+/* --------------------- */
+
+div.main{
+
+  width: 100%;
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-between;
+}
+
+div.main > div.country{
+  width: 32%;
+  height: 500px;
+ border: 1px solid #F0F0F0;
+  margin-top: 50px;
+}
+
+
+.photo{
+  width: 100%;
+  height: 50%;
+}
+
+.info{
+  width: 100%;
+  height: 40%;
+  
+}
+
+
+.price{
+  width: 100%;
+  height: 10%;
+  
+  display: flex;
+}
+
+.read_more{
+  width: 50%;
+ 
+}
+
+/* ----------------------- */
+.flex{
+    display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 50px;
+  color:white;
+  background-color: black;
+  margin-top:-15px;
+  opacity: 0.9;
+}
+.flex1{
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+}
+.flex2{
+  display: flex;
+  flex-direction: column;
+   width: 20%;
+}
+.flex3{
+  display: flex;
+  flex-direction: column;
+   width: 20%;
+}
+.flex4{
+  display: flex;
+  flex-direction: column;
+   width: 20%;
+}
+hr{
+   border: none;
+    background-color: white; /*aligning text in places on the page */
+    color: black; /*Selecting the color of the main text */
+    height: 2px; /*Change the height of the border around*/
+    width:200px;/*Change the width of the border around*/
+    margin-left: -20px;
+} 
+h5{
+    font-family: "Segoe UI";
+}
+.linkss{
+  text-decoration: none;
+  color:white;
+}
+.linkss:hover{
+    text-decoration: none;
+  color:black;
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
+/*Author-----*/
+.image2{
+  width: 100%;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.photo2{
+  width: 30%;
+  height: 600px;
+  margin-right: 7%;
+  background-color: #7F7F7F;
+}
+
+.info2{
+
+  width: 40%;
+  height: 400px;
+  margin-top: 20%;
+  margin-left: -23%;
+
+
+}

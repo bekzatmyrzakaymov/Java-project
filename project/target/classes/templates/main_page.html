@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="ISO-8859-1">
+    <title>Home Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="../static/css/style1.css" th:href="@{/css/style1.css}">
+</head>
+<body>
+
+
+
+<nav>
+    <div class = "header_section" id="myHeader" >
+        <ul>
+            <li align="left" class=" logo col-4" ><a href="#"></a></li>
+            <li align="center" class="col-3"><a class="link-1" sec:authentication="name"></a>
+            </li>
+            <li align="center" class="col-2"><a class="link-1"  sec:authentication="principal.authorities">ROLE:</a>
+
+            </li>
+            <li align="center" class="col-2"> <a sec:authorize="hasAnyAuthority('USER')" th:href="@{/MyBooks}"
+                                                 class="link-1 btn" style="color: white;">BOOK LIST</a>
+                <a sec:authorize="hasAnyAuthority('ADMIN', 'EDITOR')" th:href="@{/addBook}"
+                                                class="link-1 btn" style="color: white;">ADD BOOK</a></li>
+            <li align="center" class="col-1"><form th:action="@{/logout}" method="post">
+                <input type="submit" style="color: white;background-color: #7598B6;border: 1px solid #7598B6;" value="LOGOUT" />
+            </form></li>
+        </ul>
+    </div>
+</nav>
+
+
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+
+
+
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100 " src="https://thumbs.dreamstime.com/b/%D1%81%D1%82%D0%B0%D1%80%D0%B0%D1%8F-%D0%BA%D0%BD%D0%B8%D0%B3%D0%B0-%D1%81-%D0%BB%D0%B5%D1%82%D0%B0%D1%8E%D1%89%D0%B8%D0%BC%D0%B8-%D0%B1%D1%83%D0%BA%D0%B2%D0%B0%D0%BC%D0%B8-%D0%B8-%D0%B2%D0%BE%D0%BB%D1%88%D0%B5%D0%B1%D0%BD%D1%8B%D0%BC-%D1%81%D0%B2%D0%B5%D1%82%D0%BE%D0%BC-%D0%BD%D0%B0-%D1%84%D0%BE%D0%BD%D0%B5-%D0%BA%D0%BD%D0%B8%D0%B6%D0%BD%D0%BE%D0%B9-218640948.jpg" alt="First slide" style="height: 500px; ">
+        </div>
+        <!-- <div class="carousel-item">
+            <img class="d-block w-100" src="http://www.nationalbook.org/wp-content/uploads/2018/10/Facebook-size-homepage.png" alt="Second slide" style="height: 500px; ">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="https://www.technicalresearchpublications.com/wp-content/uploads/2020/09/2019_03_02_66706_1551461528._large.jpg" alt="Third slide" style="height: 500px; ">
+        </div>  -->
+
+
+    </div>
+
+</div>
+
+<div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+
+</div>
+
+
+
+
+
+<div class="main">
+
+    <div  th:each="book : ${listBooks}" class="country"  data-aos="fade-down">
+
+        <img  th:src="${book.image}" alt="" class="photo" >
+
+        <div  class="info" style="padding: 10px;">
+
+            <p style="font-size: 25px; margin-top: 4px;"><b>Title: </b> [[${book.title}]] </p>
+
+            <p style="margin-top: -16px;"><b>Author:</b> [[${book.author}]]</p>
+            <p style="margin-top: -16px;"><b>Description: </b><br>[[${book.description}]]</p>
+
+            <p style="margin-top: -13px; font-size: 15px; text-align: justify;"><b>Price: </b> [[${book.price}]] tenge<p>
+
+        </div>
+
+        <form sec:authorize="hasAnyAuthority('USER')"  method="post" style="height: 10%;width: 100%;background-color: #7598B6;" th:action="@{/addBookToUSer/{id}(id = ${book.id})}">
+            <button class="btn form-control" type="submit" style="color: white;">Add Book to list</button>
+        </form>
+        <div sec:authorize="hasAnyAuthority('ADMIN', 'EDITOR')" class="price">
+
+            <a th:href="@{/edit/{id}(id=${book.id})}"  class=" btn"  style="color: white; width: 50%; background-color: #7598B6;">Edit</a>
+            <a  th:href="@{/delete/{id}(id=${book.id})}" class=" btn" style="color: white; width: 50%;background-color:#82B440; ">Delete</a>
+<!--            <form method="POST" th:action="@{/delete/{id}(id=${book.id})}">-->
+<!--                <button type="submit" class="btn btn-danger">Delete</button>-->
+<!--            </form>-->
+
+        </div>
+    </div>
+
+
+
+</div>
+    <section id="mu-video-review" >
+        <div class="container-fluid text-center mt-5 w-100" style="  background-color: #7598B6;">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mu-video-review-area">
+
+                        <div class="mu-heading-area">
+                            <h2 class="mu-heading-title">Check Out Our Video Review</h2>
+                            <span class="mu-header-dot"></span>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                Lorem Ipsum has been the industry's standard dummy text ever</p>
+                        </div>
+
+
+                        <div class="mu-video-review-content">
+                            <iframe class="mu-video-iframe" width="100%" height="480"
+                                    src="https://www.youtube.com/embed/T4ySAlBt2Ug" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="image2">
+
+        <div class="photo2" data-aos="fade-right"
+             data-aos-offset="300"
+             data-aos-easing="ease-in-sine">
+            <img th:src="@{ава.jpg}" style="width: 100%; height: 100%;">
+        </div>
+
+        <div class="info2">
+
+            <div style="width: 60%;margin-left: 240px; margin-top: -25%;" data-aos="fade-left"
+                 data-aos-offset="300"
+                 data-aos-easing="ease-in-sine">
+                <h4 style="margin-left: 10px;"><b>Author</b></h4>
+                <p style="text-align: justify; margin-left: 10px;">
+                    <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, quaerat, soluta? Ab
+                        consequatur culpa, dolor dolorem eius esse exercitationem, id inventore nostrum perferendis
+                        provident quo quos sunt? Aut, pariatur, voluptates?</span>
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="flex">
+            <div class="flex1">
+
+                <div>
+                    <h5>Services</h5><hr>
+                </div>
+
+                <div>
+                    <a class="linkss" href="#">Java Spring</a>
+                </div>
+
+                <div>
+                    <a class="linkss" href="#">Spring Data, Security</a>
+                </div>
+
+            </div>
+            <div class="flex2">
+                <div>
+                    <h5>About</h5>
+                    <hr>
+                </div>
+                <div>
+                    <a class="linkss" href="#">About Us</a>
+                </div>
+            </div>
+
+            <div class="flex3">
+                    <div>
+                        <h5>Contacts</h5>
+                        <hr>
+                    </div>
+                    <div>+7654xxxxxxx</div>
+                    <div>Nur-Sultan<br>
+                        Astana IT University</div>
+            </div>
+    </footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+        // Global settings:
+        disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
+        startEvent: 'DOMContentLoaded', // name of the event dispatched on the document, that AOS should initialize on
+        initClassName: 'aos-init', // class applied after initialization
+        animatedClassName: 'aos-animate', // class applied on animation
+        useClassNames: false, // if true, will add content of `data-aos` as classes on scroll
+        disableMutationObserver: false, // disables automatic mutations' detections (advanced)
+        debounceDelay: 50, // the delay on debounce used while resizing window (advanced)
+        throttleDelay: 99, // the delay on throttle used while scrolling the page (advanced)
+
+
+        // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
+        offset: 100, // offset (in px) from the original trigger point
+        delay: 0, // values from 0 to 3000, with step 50ms
+        duration: 400, // values from 0 to 3000, with step 50ms
+        easing: 'ease', // default easing for AOS animations
+        once: false, // whether animation should happen only once - while scrolling down
+        mirror: false, // whether elements should animate out while scrolling past them
+        anchorPlacement: 'top-bottom', // defines which position of the element regarding to window should trigger the animation
+
+    });
+</script>
+
+<script>
+    window.onscroll = function() {myFunction()};
+
+    var header = document.getElementById("myHeader");
+    var sticky = header.offsetTop;
+
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
+    }
+</script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

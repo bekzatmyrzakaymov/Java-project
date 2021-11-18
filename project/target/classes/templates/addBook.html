@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="ISO-8859-1">
+
+    <title>Book </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container-fluid  d-sm-flex justify-content-center align-items-center" style="background-color: #3689F1; height: 800px;">
+
+    <div class="col-4 row mt-4 mb-4 p-2 d-flex justify-content-center" style=" background-color: white; border-radius: 10px;" >
+        <form action="#" th:action="@{/saveBook}" th:object="${book}" method="post" class="col-12 row">
+            <div class="col-12" >
+                <h3 class="text-sm-center">Add new Book</h3>
+            </div>
+            <div class="col-12 row p-3">
+                <input class="form-control col-9" type="text" th:field="*{image}" placeholder="Image ">
+            </div>
+            <div class="col-12 row p-3">
+                <input class="form-control col-9" type="text" th:field="*{title}" placeholder="Title ">
+            </div>
+
+            <div class="col-12 row p-3">
+                <input class="col-9 form-control" type="text" th:field="*{author}" placeholder="Author">
+            </div>
+            <div class="col-12 row p-3">
+                <input class="col-9 form-control" type="text" th:field="*{description}" placeholder="Description">
+            </div>
+
+            <div class="col-12 row p-3">
+                <input class="col-9 form-control" type="text" th:field="*{price}" placeholder="Price">
+            </div>
+
+
+            <div class="col-12 row p-3 ">
+                <input class="form-control " style="background-color: #2794EC; color: white;" name="submit" type="submit">
+            </div>
+            <a class="text-center" th:href="@{/all}">Back to Book List </a>
+        </form>
+
+    </div>
+
+    <br> <br>
+
+</div>
+</body>
+</html>
